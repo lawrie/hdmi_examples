@@ -1,0 +1,14 @@
+*.dblite
+*.out
+*.vcd
+*.idea
+**/*.iml
+*.bin
+*.asc
+*.rpt
+*.blif
+*.elf
+*.map
+*.log
+*.json
+*.txt
