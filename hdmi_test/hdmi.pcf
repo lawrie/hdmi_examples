@@ -1,0 +1,8 @@
+set_io clk100     129 # Onboard 100Mhz oscillator
+set_io hdmi_p[3]    1 # PMOD27 = PMOD  7/8 pin  5
+set_io hdmi_p[0]    2 # PMOD26 = PMOD  7/8 pin  7
+set_io hdmi_p[1]    9 # PMOD25 = PMOD  7/8 pin  9
+set_io hdmi_p[2]   10 # PMOD24 = PMOD  7/8 pin 11
+
+set_io -nowarn quadA 105
+set_io -nowarn quadB 102
