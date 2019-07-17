@@ -1,0 +1,12 @@
+set_io clk25 60 # Onboard 25Mhz oscillator
+
+set_io hdmi_p[3] 4
+set_io hdmi_p[0] 3
+set_io hdmi_p[1] 144
+set_io hdmi_p[2] 143
+
+set_io hdmi_n[3] 8
+set_io hdmi_n[0] 7
+set_io hdmi_n[1] 2
+set_io hdmi_n[2] 1
+
