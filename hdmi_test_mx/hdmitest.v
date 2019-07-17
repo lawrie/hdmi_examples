@@ -23,13 +23,6 @@ module top(
     output [3:0] hdmi_n
 );
 
-// Ground all the HDMI negative pins
-assign hdmi_n[0] = 0;
-assign hdmi_n[1] = 0;
-assign hdmi_n[2] = 0;
-assign hdmi_n[3] = 0;
-
-
 // For holding the outward bound TMDS symbols in the slow and fast domain
 reg [9:0] c0_symbol; reg [9:0] c0_high_speed;
 reg [9:0] c1_symbol; reg [9:0] c1_high_speed;
@@ -124,7 +117,7 @@ always @(*) begin
     end
 end
 
-// red
+// red +
 defparam hdmip2.PIN_TYPE = 6'b010000;
 defparam hdmip2.IO_STANDARD = "SB_LVCMOS";
 SB_IO hdmip2 (
@@ -136,7 +129,19 @@ SB_IO hdmip2 (
     .D_OUT_1 (c2_output_bits[0])
 );
 
-// green
+// red -
+defparam hdmin2.PIN_TYPE = 6'b010000;
+defparam hdmin2.IO_STANDARD = "SB_LVCMOS";
+SB_IO hdmin2 (
+    .PACKAGE_PIN (hdmi_n[2]),
+    .CLOCK_ENABLE (1'b1),
+    .OUTPUT_CLK (clk_x5),
+    .OUTPUT_ENABLE (1'b1),
+    .D_OUT_0 (~c2_output_bits[1]),
+    .D_OUT_1 (~c2_output_bits[0])
+);
+
+// green +
 defparam hdmip1.PIN_TYPE = 6'b010000;
 defparam hdmip1.IO_STANDARD = "SB_LVCMOS";
 SB_IO hdmip1 (
@@ -148,7 +153,19 @@ SB_IO hdmip1 (
     .D_OUT_1 (c1_output_bits[0])
 );
 
-// blue
+// green -
+defparam hdmin1.PIN_TYPE = 6'b010000;
+defparam hdmin1.IO_STANDARD = "SB_LVCMOS";
+SB_IO hdmin1 (
+    .PACKAGE_PIN (hdmi_n[1]),
+    .CLOCK_ENABLE (1'b1),
+    .OUTPUT_CLK (clk_x5),
+    .OUTPUT_ENABLE (1'b1),
+    .D_OUT_0 (~c1_output_bits[1]),
+    .D_OUT_1 (~c1_output_bits[0])
+);
+
+// blue +
 defparam hdmip0.PIN_TYPE = 6'b010000;
 defparam hdmip0.IO_STANDARD = "SB_LVCMOS";
 SB_IO hdmip0 (
@@ -160,7 +177,19 @@ SB_IO hdmip0 (
     .D_OUT_1 (c0_output_bits[0])
 );
 
-// clock
+// blue -
+defparam hdmin0.PIN_TYPE = 6'b010000;
+defparam hdmin0.IO_STANDARD = "SB_LVCMOS";
+SB_IO hdmin0 (
+    .PACKAGE_PIN (hdmi_n[0]),
+    .CLOCK_ENABLE (1'b1),
+    .OUTPUT_CLK (clk_x5),
+    .OUTPUT_ENABLE (1'b1),
+    .D_OUT_0 (~c0_output_bits[1]),
+    .D_OUT_1 (~c0_output_bits[0])
+);
+
+// clock+
 defparam hdmip3.PIN_TYPE = 6'b010000;
 defparam hdmip3.IO_STANDARD = "SB_LVCMOS";
 SB_IO hdmip3 (
@@ -170,6 +199,18 @@ SB_IO hdmip3 (
     .OUTPUT_ENABLE (1'b1),
     .D_OUT_0 (clk_output_bits[1]),
     .D_OUT_1 (clk_output_bits[0])
+);
+
+// clock -
+defparam hdmin3.PIN_TYPE = 6'b010000;
+defparam hdmin3.IO_STANDARD = "SB_LVCMOS";
+SB_IO hdmin3 (
+    .PACKAGE_PIN (hdmi_n[3]),
+    .CLOCK_ENABLE (1'b1),
+    .OUTPUT_CLK (clk_x5),
+    .OUTPUT_ENABLE (1'b1),
+    .D_OUT_0 (~clk_output_bits[1]),
+    .D_OUT_1 (~clk_output_bits[0])
 );
 // D_OUT_0 and D_OUT_1 swapped?
 // https://github.com/YosysHQ/yosys/issues/330
