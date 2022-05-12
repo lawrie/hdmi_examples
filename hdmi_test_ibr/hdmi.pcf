@@ -1,0 +1,5 @@
+set_io clk12     35 # Onboard 12Mhz oscillator
+set_io hdmi_p[3]  19 # 
+set_io hdmi_p[0]  21 # 
+set_io hdmi_p[1]  25 # 
+set_io hdmi_p[2]  27 # 
